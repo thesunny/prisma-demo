@@ -1,0 +1,11 @@
+# Use postgres/example user/password credentials
+version: "3.1"
+
+services:
+  airshelf-db:
+    image: postgres
+    restart: always
+    ports:
+      - "5437:5432"
+    environment:
+      POSTGRES_PASSWORD: my-password

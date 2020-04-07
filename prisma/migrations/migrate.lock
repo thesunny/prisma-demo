@@ -1,0 +1,11 @@
+# IF THERE'S A GIT CONFLICT IN THIS FILE, DON'T SOLVE IT MANUALLY!
+# INSTEAD EXECUTE `prisma migrate fix`
+# Prisma Migrate lockfile v1
+# Read more about conflict resolution here: TODO
+
+20200407121732-init
+20200407134938
+20200407135022-password
+20200407135226
+20200407135257-add-password
+20200407135455-rename-fields
