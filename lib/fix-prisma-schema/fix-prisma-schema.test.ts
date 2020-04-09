@@ -1,3 +1,6 @@
+import { fixSchema } from "."
+
+const BOOKS_SCHEMA = `
 generator client {
   provider = "prisma-client-js"
 }
@@ -150,3 +153,15 @@ model users {
   members          members[]
   sessions         sessions[]
 }
+`
+
+describe("Fix model name", () => {
+  it("should fix books", async () => {
+    const s = fixSchema(`
+model teams {
+  id         Int    @default(autoincrement()) @id
+}
+`)
+    console.log(s)
+  })
+})
