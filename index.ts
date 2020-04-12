@@ -15,17 +15,20 @@ async function main() {
   //     },
   //   },
   // })
-  const allUsers = await prisma.user.findMany({
+  const allUsers = await prisma.users.findMany({
+    where: {
+      shelf: {
+        pinned_book_ids: "john",
+      },
+    },
     select: {
       name: true,
       email: true,
-      posts: {
+      shelf: {
         select: {
-          title: true,
-          published: true,
+          name: true,
         },
       },
-      profile: true,
     },
   })
   console.dir(allUsers, { depth: null })

@@ -3,6 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "type": "module",
+  "# engines": "# babel breaks if we upgrade node to 13.12.0",
+  "engines": {
+    "node": "12.16.2",
+    "yarn": "1.22.4",
+    "npm": "6.9.0"
+  },
   "devDependencies": {
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-typescript": "^7.9.0",
@@ -14,21 +21,39 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
     "@prisma/client": "^2.0.0-beta.1",
+    "@types/fs-extra": "^8.1.0",
     "@types/inflection": "^1.5.28",
     "@types/jest": "^25.2.1",
+    "babel-plugin-root-import": "^6.5.0",
     "camelcase": "^6.0.0",
+    "fastparse": "^1.1.2",
+    "fs-extra": "^9.0.0",
     "inflection": "^1.12.0",
-    "jest": "^25.2.7"
+    "jest": "^25.2.7",
+    "knex": "^0.20.13",
+    "next": "^9.3.4",
+    "npm-run-all": "^4.1.5",
+    "pg": "^8.0.2",
+    "tsconfig-paths": "^3.9.0"
   },
   "scripts": {
     "prisma": "prisma",
     "prisma:generate": "prisma generate",
     "prisma:introspect": "prisma introspect",
-    "prisma:migrate:save": "prisma migrate save --experimental",
-    "prisma:migrate:up": "prisma migrate up --experimental",
+    "fix:schema": "babel-node ./scripts/fix-prisma-schema.ts --extensions='.ts'",
+    "import:schema": "npm-run-all -s prisma:introspect fix:schema prisma:generate",
     "pg": "cd docker && docker-compose up",
     "start": "ts-node index.ts",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "migrate:make": "yarn knex -x ts migrate:make",
+    "migrate:latest": "yarn knex migrate:latest",
+    "migrate:rollback": "yarn knex migrate:rollback",
+    "migrate:up": "yarn knex migrate:up",
+    "migrate:down": "yarn knex migrate:down",
+    "migrate:list": "yarn knex migrate:list",
+    "remigrate": "npm-run-all migrate:down migrate:latest import:schema"
   }
 }

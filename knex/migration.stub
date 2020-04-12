@@ -1,0 +1,38 @@
+import * as Knex from 'knex';
+
+exports.up = async function(knex: Knex): Promise<any> {
+  // await knex.schema.createTable("", function(table) {
+  //   table.increments()
+  //   table
+  //     .string("name")
+  //     .notNullable()
+  //     .unique()
+  //   table
+  //     .jsonb("body")
+  //     .notNullable()
+  //     .defaultTo({
+  //       rev: 1,
+  //       blocks: [{ type: "p", line: [{ x: "", by: 0, ms: 0 }] }],
+  //     })
+  //   table.integer("created_by").notNullable()
+  //   table.integer("updated_by").notNullable()
+  //   table
+  //     .timestamp("created_at")
+  //     .notNullable()
+  //     .defaultTo(knex.fn.now())
+  //   table
+  //     .timestamp("updated_at")
+  //     .notNullable()
+  //     .defaultTo(knex.fn.now())
+  // })
+  
+  // await knex.schema.alterTable("", function (table) {
+  // })
+}
+
+exports.down = async function(knex: Knex): Promise<any> {
+  // await knex.schema.dropTable("")
+  
+  // await knex.schema.alterTable("", function (table) {
+  // })
+}
