@@ -1,7 +1,7 @@
 import fs from "fs-extra"
 import { fixSchema } from "~/lib/fix-prisma-schema"
 
-fs.copyFileSync("./prisma/schema.prisma", "./prisma/schema.prisma.original")
+fs.copyFileSync("./prisma/schema.prisma", "./prisma/schema.original.prisma")
 
 const schema = fs.readFileSync("./prisma/schema.prisma", "utf8")
 
@@ -21,3 +21,5 @@ ${fixSchema(schema, {
 console.log(fixedSchema)
 
 fs.writeFileSync("./prisma/schema.prisma", fixedSchema, "utf8")
+
+console.log(`Finished writing ./prisma/schema.prisma`)

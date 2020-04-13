@@ -48,7 +48,11 @@ const parser = new Parser<{ lines: string[]; ignoreModels: string[] }>({
       after
     ) {
       const inflectedField = modifier === `[]` ? field : singular(field)
-      this.lines.push(`${before}// normalized\n`)
+      const comment =
+        modifier === `[]`
+          ? `// normalized (no change)`
+          : `// normalized (singularized)`
+      this.lines.push(`${before}${comment}\n`)
       this.lines.push(
         `${before}${inflectedField}${s0}${model}${optional(modifier)}${after}`
       )

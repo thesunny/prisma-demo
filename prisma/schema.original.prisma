@@ -107,8 +107,8 @@ model users {
   first_name       String
   id               Int        @id
   last_name        String
-  shelf_id         Int        @unique
+  name             String     @unique
   starred_book_ids String     @default(dbgenerated())
-  shelves          shelves    @relation(fields: [shelf_id], references: [id])
+  shelves          shelves    @relation(fields: [id], references: [id])
   sessions         sessions[]
 }

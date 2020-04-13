@@ -20,7 +20,7 @@ model archived_pages {
   original_page_id Int
   sibling_ids      String
   title            String
-  // normalized
+  // normalized (singularized)
   book            books  @relation(fields: [book_id], references: [id])
 
   @@unique([book_id, original_page_id], name: "archived_pages_book_id_original_page_id_unique")
@@ -36,13 +36,13 @@ model books {
   title          String
   toc            String
   updated_at     Int
-  // normalized
+  // normalized (singularized)
   shelf        shelves?         @relation(fields: [shelf_id], references: [id])
-  // normalized
+  // normalized (no change)
   archived_pages archived_pages[]
-  // normalized
+  // normalized (no change)
   pages          pages[]
-  // normalized
+  // normalized (no change)
   removed_pages  removed_pages[]
 
   @@unique([shelf_id, name], name: "books_shelf_id_name_unique")
@@ -60,7 +60,7 @@ model pages {
   markdown   String
   name       String?
   title      String
-  // normalized
+  // normalized (singularized)
   book      books   @relation(fields: [book_id], references: [id])
 
   @@unique([book_id, name], name: "pages_book_id_name_unique")
@@ -77,7 +77,7 @@ model removed_pages {
   original_page_id Int
   sibling_ids      String
   title            String
-  // normalized
+  // normalized (singularized)
   book            books  @relation(fields: [book_id], references: [id])
 
   @@unique([book_id, original_page_id], name: "removed_pages_book_id_original_page_id_unique")
@@ -89,7 +89,7 @@ model sessions {
   id         Int    @default(autoincrement()) @id
   token      String @unique
   user_id    Int?
-  // normalized
+  // normalized (singularized)
   user      users? @relation(fields: [user_id], references: [id])
 }
 
@@ -99,9 +99,9 @@ model shelves {
   name            String  @unique
   pinned_book_ids String  @default(dbgenerated())
   type            String
-  // normalized
+  // normalized (no change)
   books           books[]
-  // normalized
+  // normalized (singularized)
   user           users?
 }
 
@@ -113,8 +113,8 @@ model users {
   last_name        String
   name             String     @unique
   starred_book_ids String     @default(dbgenerated())
-  // normalized
+  // normalized (singularized)
   shelf          shelves    @relation(fields: [id], references: [id])
-  // normalized
+  // normalized (no change)
   sessions         sessions[]
 }
