@@ -40,11 +40,12 @@
     "tsconfig-paths": "^3.9.0"
   },
   "scripts": {
+    "--- prisma": "# prisma related",
     "prisma": "prisma",
-    "prisma:generate": "prisma generate",
-    "prisma:introspect": "prisma introspect",
-    "fix:schema": "babel-node ./scripts/fix-prisma-schema.ts --extensions='.ts'",
-    "import:schema": "npm-run-all -s prisma:introspect fix:schema prisma:generate",
+    "generate:prisma:client": "prisma generate",
+    "introspect:prisma:schema": "prisma introspect",
+    "fix:prisma:schema": "babel-node ./scripts/fix-prisma-schema.ts --extensions='.ts'",
+    "make:prisma": "npm-run-all -s introspect:prisma:schema fix:prisma:schema generate:prisma:client",
     "pg": "cd docker && docker-compose up",
     "start": "ts-node index.ts",
     "test": "jest --watch",
@@ -54,6 +55,6 @@
     "migrate:up": "yarn knex migrate:up",
     "migrate:down": "yarn knex migrate:down",
     "migrate:list": "yarn knex migrate:list",
-    "remigrate": "npm-run-all migrate:down migrate:latest import:schema"
+    "remigrate": "npm-run-all migrate:down migrate:latest make:prisma"
   }
 }
