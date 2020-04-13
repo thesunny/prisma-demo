@@ -24,6 +24,7 @@ describe("Fix model name", () => {
 
     expect(s).toEqual(`
       model teams {
+        // normalized (singularized)
         shelf    shelves? @relation(fields: [shelf_id], references: [id])
       }`)
   })
@@ -36,6 +37,7 @@ describe("Fix model name", () => {
 
     expect(s).toEqual(`
       model teams {
+        // normalized (singularized)
         shelf    shelves @relation(fields: [shelf_id], references: [id])
       }`)
   })
@@ -48,6 +50,7 @@ describe("Fix model name", () => {
 
     expect(s).toEqual(`
       model teams {
+        // normalized (no change)
         shelves    shelves[] @relation(fields: [shelf_id], references: [id])
       }`)
   })
@@ -74,9 +77,13 @@ describe("Fix model name", () => {
         ignoreModels: ["knex_migrations", "knex_migrations_lock"],
       }
     )
-    expect(s).toEqual(`  model users {
+    expect(s).toEqual(`// skipped model knex_migrations
+
+  model users {
     id Int
   }
+
+// skipped model knex_migrations_lock
 `)
   })
 
